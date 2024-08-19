@@ -1,0 +1,60 @@
+﻿@model IEnumerable<WebApplication1.Models.Student>
+
+@{
+    ViewBag.Title = "Students List";
+}
+
+<h2>Students List</h2>
+
+<p>
+    @Html.ActionLink("Create New Student", "Create", "Student", new { area = "" }, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().ClassStream.StreamName)
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => student.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => student.LastName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => student.ClassStream.StreamName)
+                </td>
+                <td>
+                    @Html.ActionLink("View Details", "Details", new { id = student.StudentId }, new { @class = "btn btn-info" })
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = student.StudentId }, new { @class = "btn btn-warning" })
+                </td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Student", FormMethod.Post, new { id = "delete-form-" + student.StudentId }))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.Hidden("id", student.StudentId)
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this student?');">Delete</button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

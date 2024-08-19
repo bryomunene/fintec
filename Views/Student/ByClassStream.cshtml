@@ -1,0 +1,35 @@
+﻿@model WebApplication1.Models.StudentByClassStreamViewModel;
+
+@{
+    ViewBag.Title = "Students in " + Model.ClassStream.StreamName;
+}
+
+<h2>Students in @Model.ClassStream.StreamName</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Students.First().FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Students.First().LastName)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var student in Model.Students)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => student.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => student.LastName)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.ActionLink("Back to Class Streams", "Index", "ClassStream", new { area = "" }, new { @class = "btn btn-default" })

@@ -1,0 +1,41 @@
+﻿@model IEnumerable<WebApplication1.Models.ClassStream>
+
+@{
+    ViewBag.Title = "Class Streams List";
+}
+
+<h2>Class Streams List</h2>
+
+<p>
+    @Html.ActionLink("Create New Class Stream", "Create", "ClassStream", new { area = "" }, new { @class = "btn btn-primary" })
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.First().StreamName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.First().Class.Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var classStream in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => classStream.StreamName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => classStream.Class.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("View Details", "Details", new { id = classStream.ClassStreamId }, new { @class = "btn btn-info btn-sm" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
